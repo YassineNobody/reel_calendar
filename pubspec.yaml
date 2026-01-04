@@ -1,0 +1,22 @@
+name: reel_calendar
+description: "Opinionated Flutter calendar package with day, week and month views, designed for internal use."
+version: 0.0.1
+# homepage: https://github.com/TON_ORG/reel_calendar
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_svg: ^2.0.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
