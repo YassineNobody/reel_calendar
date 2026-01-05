@@ -44,10 +44,16 @@ class MonthGrid extends StatelessWidget {
           itemBuilder: (context, index) {
             final date = gridStartDate.add(Duration(days: index));
 
-            final eventsForDay = [
-              ...eventController.allDayEventsForDay(date),
-              ...eventController.timedEventsForDay(date),
-            ];
+            final Map<String, ReelCalendarEvent> unique = {};
+
+            for (final e in eventController.allDayEventsForDay(date)) {
+              unique[e.id] = e;
+            }
+            for (final e in eventController.timedEventsForDay(date)) {
+              unique[e.id] = e;
+            }
+
+            final eventsForDay = unique.values.toList();
 
             return MonthDayCell(
               onMenuAction: onMenuAction,
