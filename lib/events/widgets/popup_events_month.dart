@@ -24,9 +24,19 @@ class DayEventsModal extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final allDayEvents = eventController.allDayEventsForDay(day);
-    final timedEvents = eventController.timedEventsForDay(day);
+    final Map<String, ReelCalendarEvent> unique = {};
 
+    for (final e in eventController.allDayEventsForDay(day)) {
+      unique[e.id] = e;
+    }
+    for (final e in eventController.timedEventsForDay(day)) {
+      unique[e.id] = e;
+    }
+
+    final events = unique.values.toList();
+
+    final allDayEvents = events.where((e) => e.allDay).toList();
+    final timedEvents = events.where((e) => !e.allDay).toList();
     return Material(
       color: const Color(0xFFF7F7F7),
       child: SafeArea(
@@ -252,7 +262,6 @@ class _EventCard extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                           ),
                         ),
-
                         if (event.eventLink != null) ...[
                           const SizedBox(height: 4),
                           EventLinkIcon(
@@ -262,7 +271,6 @@ class _EventCard extends StatelessWidget {
                             },
                           ),
                         ],
-
                         const SizedBox(height: 4),
                         Text(
                           event.allDay
