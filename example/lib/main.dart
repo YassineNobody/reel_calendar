@@ -17,9 +17,42 @@ void main() {
   final eventController = ReelCalendarEventController();
 
   final now = DateTime.now();
+  final coranEvents = [
+    // ───── JANVIER 2026 : LECTURE DU CORAN (OCCURRENCES) ─────
+    ReelCalendarEvent(
+      id: '9512b042-9570-4ac5-97bf-ac883f8f93be',
+      title: 'Lecture du Coran',
+      description: 'Lecture quotidienne après fajr',
+      start: DateTime(2026, 1, 1, 5, 30),
+      end: DateTime(2026, 1, 1, 6, 0),
+      allDay: false,
+      typesEvent: [TypeEvent(color: Colors.deepPurple, name: 'Rituels')],
+    ),
+    ReelCalendarEvent(
+      id: 'f5d886bc-2140-4898-b0bc-e316bb5a692f',
+      title: 'Lecture du Coran',
+      description: 'Lecture quotidienne après fajr',
+      start: DateTime(2026, 1, 2, 5, 30),
+      end: DateTime(2026, 1, 2, 6, 0),
+      allDay: false,
+      typesEvent: [TypeEvent(color: Colors.deepPurple, name: 'Rituels')],
+    ),
+    ReelCalendarEvent(
+      id: '2457424e-2623-4cfe-9a85-36d140bb6ef7',
+      title: 'Lecture du Coran',
+      description: 'Lecture quotidienne après fajr',
+      start: DateTime(2026, 1, 3, 5, 30),
+      end: DateTime(2026, 1, 3, 6, 0),
+      allDay: false,
+      typesEvent: [TypeEvent(color: Colors.deepPurple, name: 'Rituels')],
+    ),
+
+    // 👉 tu continues exactement sur le même modèle
+  ];
 
   // ───────── EVENTS DE TEST ─────────
   eventController.setEvents([
+    // ───── EVENTS ALL-DAY EXISTANTS ─────
     ReelCalendarEvent(
       id: '1',
       title: 'Jour férié avec un titre tres long juste pour tester',
@@ -28,30 +61,27 @@ void main() {
       allDay: true,
       description: '',
       typesEvent: [TypeEvent(color: Colors.red, name: "Fêtes (France)")],
-      eventLink: EventLink(
-        label: 'google',
-        type: EventLinkType.zoom,
-        value: 'https://en.wikipedia.org/wiki/Google_logo',
-      ),
     ),
+
     ReelCalendarEvent(
       id: '4',
       title: 'Jour plus',
       start: DateTime(now.year, now.month, now.day + 1),
       end: DateTime(now.year, now.month, now.day + 2),
       allDay: true,
-      typesEvent: [TypeEvent(color: Colors.red, name: "Fêtes (France)")],
       description: '',
+      typesEvent: [TypeEvent(color: Colors.red, name: "Fêtes (France)")],
     ),
+
+    // ───── EVENTS NON ALL-DAY EXISTANTS ─────
     ReelCalendarEvent(
       id: '3',
       title: 'Call sometime I am sad',
-      description:
-          'petite description ici tres rapide et un peu longue pour ajuster le style si possible a voir. \ndemain on verra le soleil se coucher doucement a l\'aurore de nos jours glorieux',
+      description: 'petite description ici tres rapide',
       start: DateTime(now.year, now.month, now.day, 17),
       end: DateTime(now.year, now.month, now.day, 18),
-      typesEvent: [TypeEvent(color: Colors.green, name: 'yassine@gmail.com')],
       allDay: false,
+      typesEvent: [TypeEvent(color: Colors.green, name: 'yassine@gmail.com')],
     ),
 
     ReelCalendarEvent(
@@ -59,11 +89,15 @@ void main() {
       title: 'Call my mon',
       description: 'petite description ici tres rapide',
       start: DateTime(2026, 1, 5, 10, 30),
-      end: DateTime(2026, 01, 5, 10, 35),
+      end: DateTime(2026, 1, 5, 10, 35),
       allDay: false,
       typesEvent: [TypeEvent(color: Colors.green, name: 'yassine@gmail.com')],
     ),
+
+    // ───── OCCURRENCES API (LECTURE DU CORAN) ─────
+    ...coranEvents,
   ]);
+
   // ───────── CALLBACKS DE TEST ─────────
   eventController.onWeekChange = (startOfWeek) async {
     debugPrint('🟢 onWeekChange → $startOfWeek');
@@ -75,7 +109,7 @@ void main() {
     debugPrint('🟣 onMonthChange → $month');
   };
 
-  calendarController.setView(CalendarView.month);
+  calendarController.setView(CalendarView.week);
 
   runApp(
     MaterialApp(
