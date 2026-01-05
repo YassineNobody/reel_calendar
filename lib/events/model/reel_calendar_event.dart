@@ -46,17 +46,17 @@ class ReelCalendarEvent {
     this.eventLink,
     this.allDay = false,
   });
-
   bool occursOnDay(DateTime day) {
     final d = DateTime(day.year, day.month, day.day);
     final startDay = DateTime(start.year, start.month, start.day);
     final endDay = DateTime(end.year, end.month, end.day);
 
     if (allDay) {
-      // end EXCLUSIF
+      // end exclusif (standard calendrier)
       return !d.isBefore(startDay) && d.isBefore(endDay);
     }
 
-    return start.isBefore(d.add(const Duration(days: 1))) && end.isAfter(d);
+    // 🔑 NON all-day → UN SEUL JOUR
+    return d == startDay;
   }
 }
